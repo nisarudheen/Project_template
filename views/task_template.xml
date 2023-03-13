@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+         <record id="task_template_kanban_view1" model="ir.ui.view">
+            <field name="name">task.template.kanban</field>
+            <field name="model">task.template</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="customer_id"/>
+                    <field name="project_id"/>
+                    <field name="tags_ids" widget="many2many_tags"/>
+                    <field name="company_id"/>
+                    <field name="deadline"/>
+                    <field name="sale_order_item"/>
+                </kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                            </div>
+                            <div>
+                                <field name="customer_id"/>
+                            </div>
+                            <div>
+                                <field name="tags_ids"/>
+                            </div>
+                            <div>
+                                <field name="company_id"/>
+                            </div>
+                            <div>
+                                <field name="deadline"/>
+                            </div>
+                            <div>
+                                <field name="project_id"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </field>
+        </record>
+        <record id="task_template_view_form" model="ir.ui.view">
+            <field name="name">task.template.form</field>
+            <field name="model">task.template</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="create_task" class="oe_highlight"
+                                 string="Create" type="object"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <group>
+                                <field name="customer_id"/>
+                                <field name="project_id"/>
+                                <field name="assignees"/>
+                                <field name="tags_ids" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <field name="company_id"/>
+                                <field name="deadline"/>
+                                <field name="sale_order_item"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="description" string="Description">
+                                <field name="description"
+                                       placeholder="Project description..."/>
+                            </page>
+                        </notebook>
+                        <group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="task_template_action" model="ir.actions.act_window">
+            <field name="name">TaskTemplate</field>
+            <field name="res_model">task.template</field>
+            <field name="view_mode">kanban,form</field>
+        </record>
+    </data>
+</odoo>
